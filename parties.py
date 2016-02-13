@@ -47,36 +47,27 @@ partydict = {
 	# print(kkk)
 
 # source = r
-def find_clean(url, party):
-	source = requests.get(url)
-	soup = bs4.BeautifulSoup(source.content)
-	k = soup.findAll('strong')
-	kk = [x.contents for x in k]
-	kkk = [''.join(x) for x in kk]
-	#####
-	gah = {x: party for x in kkk}
-	# end = json.dumps(gah)
-	print(gah) 
-	return gah
+# def find_clean(url, party):
+# 	source = requests.get(url)
+# 	soup = bs4.BeautifulSoup(source.content)
+# 	k = soup.findAll('strong')
+# 	kk = [x.contents for x in k]
+# 	kkk = [''.join(x) for x in kk]
+# 	#####
+# 	gah = {x: party for x in kkk}
+# 	# end = json.dumps(gah)
+# 	print(gah) 
+# 	return gah
 
-master = {}
-for key, value in partydict.items():
-	x = find_clean(key, value)
-	master.update(x)
+# master = {}
+# for key, value in partydict.items():
+# 	x = find_clean(key, value)
+# 	master.update(x)
 
-print(master)
-print(len(master))
+# print(master)
+# print(len(master))
 
-rr = requests.get('https://petition.parliament.uk/petitions/121152.json')
-lol2 = rr.json()['data']['attributes']['signatures_by_constituency']
-# lol1 = lol2['attributes']
-# lol = lol1['signatures_by_constituency']
-print(lol2)
-print(type(lol2))
 
-for x in lol2:
-	for k, v in x.items():
-		print(v)
 
 
 
@@ -89,5 +80,54 @@ for x in lol2:
 # xx = json.dumps(gah)
 # print(xx)
 
+# partydict = {
+# 	"http://www.ukpolitical.info/conservative-mps-elected-2015.htm" : "Conservative",
+# 	"http://www.ukpolitical.info/labour-mps-elected-2015.htm" : "Labour",
+# 	"http://www.ukpolitical.info/liberal-democrat-mps-elected-2015.htm" : "Lib-Dem"
+# }
 
+def find_clean_new(url):
+	source = requests.get(url)
+	soup = bs4.BeautifulSoup(source.content)
+	k = soup.findAll('strong')
+	kk = [x.contents for x in k]
+	kkk = [''.join(x) for x in kk]
+	#####
+	print(kkk)
+	return kkk
 
+con = find_clean_new("http://www.ukpolitical.info/conservative-mps-elected-2015.htm")
+lab = find_clean_new("http://www.ukpolitical.info/labour-mps-elected-2015.htm")
+lib = find_clean_new("http://www.ukpolitical.info/liberal-democrat-mps-elected-2015.htm")
+
+rr = requests.get('https://petition.parliament.uk/petitions/121152.json')
+lol2 = rr.json()['data']['attributes']['signatures_by_constituency']
+# lol1 = lol2['attributes']
+# lol = lol1['signatures_by_constituency']
+print(lol2)
+print(type(lol2))
+
+conval = 0
+labval = 0
+libval = 0
+othval = 0
+counter = 0
+
+for x in lol2:
+	counter += 1
+	if x['name'] in con:
+		conval += x['signature_count']
+	elif x['name'] in lab:
+		labval += x['signature_count']
+	elif x['name'] in lib: 
+		libval += x['signature_count']
+	else: 
+		othval += x['signature_count']
+
+print(conval)
+print(labval)
+print(libval)
+print(othval)
+
+print(conval + labval + libval + othval)
+print(counter)
