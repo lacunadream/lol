@@ -2,21 +2,21 @@ import requests
 import bs4
 import json
 
-# r = requests.get("http://www.bbc.co.uk/news/politics/constituencies")
-# soup = bs4.BeautifulSoup(r.content)
-# k = soup.findAll("tr", {"class" : "az-table__row"})
-# kk = [x.find("a") for x in k]
-# kkk = [x['href'] for x in kk]
+r = requests.get("http://www.bbc.co.uk/news/politics/constituencies")
+soup = bs4.BeautifulSoup(r.content, "lxml")
+k = soup.findAll("tr", {"class" : "az-table__row"})
+kk = [x.find("a") for x in k]
+kkk = [x['href'] for x in kk]
 
-# print(kkk)
-# print(len(kkk))
+print(kkk)
+print(len(kkk))
 
 baseUrl = "http://www.bbc.co.uk"
 
 # seatName = soup.find("h1", {"class":"constituency-title__title"})
 
-ss = '/news/politics/constituencies/W07000049'
-print(ss[len(ss)-9:len(ss)])
+# ss = '/news/politics/constituencies/W07000049'
+# print(ss[len(ss)-9:len(ss)])
 
 # for x in kkk:
 # 	r = requests.get(baseUrl + x)
@@ -31,7 +31,7 @@ def dropList(x):
 
 def indivScrap(url):
 	r = requests.get(baseUrl + url)
-	soup = bs4.BeautifulSoup(r.content)
+	soup = bs4.BeautifulSoup(r.content, "lxml")
 
 	name = soup.find("h1", {"class":"constituency-title__title"}).contents
 	seatName = ''.join(name)
@@ -46,5 +46,30 @@ def indivScrap(url):
 	print(seatID)
 	print(seatResult)
 	print(seatMajority)
+	d = {
+		seatName: {
+			"result": seatResult,
+			"id": seatID,
+			"majority": seatMajority
+		}
+	}
+	print(d)
+	master.update(d)
+	return d
+
+
+master = {}
 
 indivScrap('/news/politics/constituencies/W07000049')
+
+print(master)
+
+with open('parties.txt', 'w') as outfile:
+    json.dump(master, outfile)
+
+
+# for x in kkk:
+# 	part = indivScrap(x)
+# 	master.update(part)
+# 	print(master)
+
