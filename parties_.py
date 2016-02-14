@@ -54,22 +54,18 @@ def indivScrap(url):
 		}
 	}
 	print(d)
-	master.update(d)
 	return d
 
 
 master = {}
+counter = 0
 
-indivScrap('/news/politics/constituencies/W07000049')
-
-print(master)
-
+for x in kkk:
+	part = indivScrap(x)
+	master.update(part)
+	print(master)
+	counter += 1
+	print(counter)
+	
 with open('parties.txt', 'w') as outfile:
     json.dump(master, outfile)
-
-
-# for x in kkk:
-# 	part = indivScrap(x)
-# 	master.update(part)
-# 	print(master)
-
