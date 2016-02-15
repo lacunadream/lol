@@ -34,22 +34,23 @@ def indivScrap(url):
 	soup = bs4.BeautifulSoup(r.content, "lxml")
 
 	name = soup.find("h1", {"class":"constituency-title__title"}).contents
-	seatName = ''.join(name)
+	seatName = ''.join(name).replace('&', 'and')
 
 	seatID  = url[len(url)-9:len(url)]
 
 	result = soup.find("span", {"class": "results-turnout__label"}).contents
 	seatResult = dropList(result)[0:3]
 	majority = soup.find("span", {"class": "results-turnout__value results-turnout__value--right"}).contents
-	seatMajority = dropList(majority)
+	majority = dropList(majority)[0:len(majority) -1]
+	seatMajority = float(majority)
 	print(seatName)
 	print(seatID)
 	print(seatResult)
 	print(seatMajority)
 	d = {
-		seatName: {
+		seatID: {
 			"result": seatResult,
-			"id": seatID,
+			"name": seatName,
 			"majority": seatMajority
 		}
 	}

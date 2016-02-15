@@ -849,7 +849,7 @@
       "majority":"29.3%",
       "result":"LAB"
    },
-   "Fife North East":{
+   "North East Fife":{
       "id":"S14000049",
       "majority":"9.6%",
       "result":"SNP"
@@ -2294,7 +2294,7 @@
       "majority":"35.0%",
       "result":"SF "
    },
-   "Aberdeenshire West and Kincardine":{
+   "West Aberdeenshire and Kincardine":{
       "id":"S14000058",
       "majority":"12.7%",
       "result":"SNP"
@@ -2304,7 +2304,7 @@
       "majority":"8.2%",
       "result":"LD "
    },
-   "Na h-Eileanan an Iar (Western Isles)":{
+   "Na h-Eileanan an Iar":{
       "id":"S14000027",
       "majority":"25.7%",
       "result":"SNP"
@@ -2529,7 +2529,7 @@
       "majority":"0.7%",
       "result":"LAB"
    },
-   "Linlithgow and Falkirk East":{
+   "Linlithgow and East Falkirk":{
       "id":"S14000043",
       "majority":"21.0%",
       "result":"SNP"
@@ -2999,7 +2999,7 @@
       "majority":"29.9%",
       "result":"CON"
    },
-   "Ayrshire North and Arran":{
+   "North Ayrshire and Arran":{
       "id":"S14000048",
       "majority":"25.2%",
       "result":"SNP"
