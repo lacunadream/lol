@@ -40,9 +40,12 @@ def indivScrap(url):
 
 	result = soup.find("span", {"class": "results-turnout__label"}).contents
 	seatResult = dropList(result)[0:3]
+
 	majority = soup.find("span", {"class": "results-turnout__value results-turnout__value--right"}).contents
-	majority = dropList(majority)[0:len(majority) -1]
+	majority = dropList(majority)
+	majority = majority[0:len(majority)-1]
 	seatMajority = float(majority)
+
 	print(seatName)
 	print(seatID)
 	print(seatResult)
@@ -68,5 +71,5 @@ for x in kkk:
 	counter += 1
 	print(counter)
 	
-with open('parties.txt', 'w') as outfile:
+with open('parties_ID.txt', 'w') as outfile:
     json.dump(master, outfile)
