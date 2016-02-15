@@ -100,7 +100,7 @@ con = find_clean_new("http://www.ukpolitical.info/conservative-mps-elected-2015.
 lab = find_clean_new("http://www.ukpolitical.info/labour-mps-elected-2015.htm")
 lib = find_clean_new("http://www.ukpolitical.info/liberal-democrat-mps-elected-2015.htm")
 
-rr = requests.get('https://petition.parliament.uk/petitions/121152.json')
+rr = requests.get('https://petition.parliament.uk/petitions/114003.json')
 lol2 = rr.json()['data']['attributes']['signatures_by_constituency']
 # lol1 = lol2['attributes']
 # lol = lol1['signatures_by_constituency']
